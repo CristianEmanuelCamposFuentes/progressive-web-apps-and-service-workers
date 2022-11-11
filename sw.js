@@ -5,6 +5,7 @@ const archivos = [
     'index.html',
     './css/bootstrap.css',
     './css/styles.css',
+    'error.html',
     './js/app.js',
     './js/apv.js'
 ];
@@ -36,8 +37,7 @@ self.addEventListener('fetch', e => {
 
     e.respondWith(
         caches.match(e.request)
-        .then( respuestaCache => {
-            return respuestaCache
-        })
+        .then( respuestaCache => (respuestaCache ? respuestaCache : 
+                caches.match('error.html')))
     )
-} );
+});
